@@ -1,0 +1,4 @@
+<launch>
+  <param name="test_module" value="."/>
+  <test test-name="deepsim_btree" pkg="deepsim_btree" type="pytest_runner.py" />
+</launch>

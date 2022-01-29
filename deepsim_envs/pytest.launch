@@ -1,0 +1,4 @@
+<launch>
+  <param name="test_module" value="."/>
+  <test test-name="deepsim_envs" pkg="deepsim_envs" type="pytest_runner.py" />
+</launch>

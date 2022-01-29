@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>deepsim_gazebo_plugin</name>
+  <author>Amazon Web Services</author>
+  <version>0.1.0</version>
+  <description>Gazebo System Plugin for DeepSim Framework.</description>
+  <maintainer email="aws-deepracer@amazon.com">AWS DeepRacer</maintainer>
+  <license>Apache License 2.0</license>
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roslint</build_depend>
+
+  <depend>gazebo_ros</depend>
+  <depend>gazebo</depend>
+  <depend>gazebo_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>deepsim_msgs</depend>
+  <depend>roscpp</depend>
+  <depend>roslib</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <gazebo_ros plugin_path="${prefix}/lib" />
+    <gazebo_ros gazebo_media_path="${prefix}" />
+  </export>
+</package>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>deepsim</name>
+  <author>Amazon Web Services</author>
+  <version>0.1.0</version>
+  <description>DeepSim framework for Gazebo and ROS.</description>
+  <maintainer email="aws-deepracer@amazon.com">AWS DeepRacer</maintainer>
+  <license>Apache License 2.0</license>
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>rosgraph_msgs</depend>
+  <depend>gazebo_msgs</depend>
+  <depend>deepsim_msgs</depend>
+
+  <test_depend>python3-pytest</test_depend>
+</package>
