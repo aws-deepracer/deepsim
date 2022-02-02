@@ -127,9 +127,15 @@ class InvisibleEffectTest(TestCase):
         get_visual_names_mock.return_value.link_names = [link_name, link_name2]
         get_visual_names_mock.return_value.visual_names = [visual_name, visual_name2]
         get_visuals_mock = MagicMock()
-        get_visuals_mock.return_value.link_names = [link_name, link_name2]
-        get_visuals_mock.return_value.visual_names = [visual_name, visual_name2]
-        get_visuals_mock.return_value.visibles = [True, True]
+        visual1 = MagicMock()
+        visual1.link_name = link_name
+        visual1.visual_name = visual_name
+        visual1.visible = True
+        visual2 = MagicMock()
+        visual2.link_name = link_name2
+        visual2.visual_name = visual_name2
+        visual2.visible = True
+        get_visuals_mock.return_value.visuals = [visual1, visual2]
 
         def service_proxy_creator(service_name, service_class):
             if service_name == GazeboServiceName.GET_MODEL_PROPERTIES:
@@ -170,9 +176,15 @@ class InvisibleEffectTest(TestCase):
         get_visual_names_mock.return_value.link_names = [link_name, link_name2]
         get_visual_names_mock.return_value.visual_names = [visual_name, visual_name2]
         get_visuals_mock = MagicMock()
-        get_visuals_mock.return_value.link_names = [link_name, link_name2]
-        get_visuals_mock.return_value.visual_names = [visual_name, visual_name2]
-        get_visuals_mock.return_value.visibles = [True, True]
+        visual1 = MagicMock()
+        visual1.link_name = link_name
+        visual1.visual_name = visual_name
+        visual1.visible = True
+        visual2 = MagicMock()
+        visual2.link_name = link_name2
+        visual2.visual_name = visual_name2
+        visual2.visible = True
+        get_visuals_mock.return_value.visuals = [visual1, visual2]
 
         def service_proxy_creator(service_name, service_class):
             if service_name == GazeboServiceName.GET_MODEL_PROPERTIES:
@@ -223,12 +235,12 @@ class InvisibleEffectTest(TestCase):
         body_name = "body_name"
         link_name = "{}::{}".format(name, body_name)
         visual_name = "visual_name"
-        transparency = 0.0
+        visible = True
 
         body_name2 = "body_name2"
         link_name2 = "{}::{}".format(name, body_name2)
         visual_name2 = "visual_name2"
-        transparency2 = 0.5
+        visible2 = False
 
         get_model_prop_mock = MagicMock()
         get_model_prop_mock.return_value.body_names = [body_name, body_name2]
@@ -236,9 +248,15 @@ class InvisibleEffectTest(TestCase):
         get_visual_names_mock.return_value.link_names = [link_name, link_name2]
         get_visual_names_mock.return_value.visual_names = [visual_name, visual_name2]
         get_visuals_mock = MagicMock()
-        get_visuals_mock.return_value.link_names = [link_name, link_name2]
-        get_visuals_mock.return_value.visual_names = [visual_name, visual_name2]
-        get_visuals_mock.return_value.transparencies = [transparency, transparency2]
+        visual1 = MagicMock()
+        visual1.link_name = link_name
+        visual1.visual_name = visual_name
+        visual1.visible = visible
+        visual2 = MagicMock()
+        visual2.link_name = link_name2
+        visual2.visual_name = visual_name2
+        visual2.visible = visible2
+        get_visuals_mock.return_value.visuals = [visual1, visual2]
 
         def service_proxy_creator(service_name, service_class):
             if service_name == GazeboServiceName.GET_MODEL_PROPERTIES:
@@ -267,6 +285,6 @@ class InvisibleEffectTest(TestCase):
             # Confirm next update detached the effect.
             tracker_mock.get_instance.return_value.set_visual_visible.has_calls(
                 call(link_name, visual_name, True),
-                call(link_name2, visual_name2, True)
+                call(link_name2, visual_name2, False)
             )
 

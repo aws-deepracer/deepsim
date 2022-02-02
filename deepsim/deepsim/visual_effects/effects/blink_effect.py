@@ -165,12 +165,10 @@ class BlinkEffect(AbstractEffect):
         After detach, reset transparencies to original.
         """
         if self.is_initialized:
-            for link_name, visual_name, transparency in zip(self._orig_visuals.link_names,
-                                                            self._orig_visuals.visual_names,
-                                                            [0.0] * len(self._orig_visuals.visual_names)):
-                SetVisualTransparencyTracker.get_instance().set_visual_transparency(link_name,
-                                                                                    visual_name,
-                                                                                    transparency)
+            for visual in self._orig_visuals.visuals:
+                SetVisualTransparencyTracker.get_instance().set_visual_transparency(visual.link_name,
+                                                                                    visual.visual_name,
+                                                                                    visual.transparency)
 
     def on_update_effect(self, delta_time: float, sim_time: Clock) -> None:
         """
@@ -182,12 +180,10 @@ class BlinkEffect(AbstractEffect):
         """
         if self._current_duration < self._duration:
             cur_alpha = lerp(self._source_alpha, self._target_alpha, self._current_interval / self._interval)
-            transparencies = [1.0 - cur_alpha for _ in self._orig_visuals.transparencies]
-            for link_name, visual_name, transparency in zip(self._orig_visuals.link_names,
-                                                            self._orig_visuals.visual_names,
-                                                            transparencies):
-                SetVisualTransparencyTracker.get_instance().set_visual_transparency(link_name,
-                                                                                    visual_name,
+            transparency = 1.0 - cur_alpha
+            for visual in self._orig_visuals.visuals:
+                SetVisualTransparencyTracker.get_instance().set_visual_transparency(visual.link_name,
+                                                                                    visual.visual_name,
                                                                                     transparency)
 
             self._current_interval += delta_time

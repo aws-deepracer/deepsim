@@ -109,12 +109,10 @@ class InvisibleEffect(AbstractEffect):
         After detach, reset to original.
         """
         if self.is_initialized:
-            for link_name, visual_name, visible in zip(self._orig_visuals.link_names,
-                                                       self._orig_visuals.visual_names,
-                                                       self._orig_visuals.visibles):
-                SetVisualVisibleTracker.get_instance().set_visual_visible(link_name=link_name,
-                                                                          visual_name=visual_name,
-                                                                          visible=visible)
+            for visual in self._orig_visuals.visuals:
+                SetVisualVisibleTracker.get_instance().set_visual_visible(link_name=visual.link_name,
+                                                                          visual_name=visual.visual_name,
+                                                                          visible=visual.visible)
 
     def on_update_effect(self, delta_time, sim_time) -> None:
         """
@@ -128,14 +126,10 @@ class InvisibleEffect(AbstractEffect):
             if self._first_update_call:
                 self._first_update_call = False
 
-                visibles = [False for _ in self._orig_visuals.visual_names]
-
-                for link_name, visual_name, visible in zip(self._orig_visuals.link_names,
-                                                           self._orig_visuals.visual_names,
-                                                           visibles):
-                    SetVisualVisibleTracker.get_instance().set_visual_visible(link_name=link_name,
-                                                                              visual_name=visual_name,
-                                                                              visible=visible)
+                for visual in self._orig_visuals.visuals:
+                    SetVisualVisibleTracker.get_instance().set_visual_visible(link_name=visual.link_name,
+                                                                              visual_name=visual.visual_name,
+                                                                              visible=False)
 
             self._current_duration += delta_time
         else:

@@ -201,9 +201,15 @@ class BlinkEffectTest(TestCase):
         get_visual_names_mock.return_value.link_names = [link_name, link_name2]
         get_visual_names_mock.return_value.visual_names = [visual_name, visual_name2]
         get_visuals_mock = MagicMock()
-        get_visuals_mock.return_value.link_names = [link_name, link_name2]
-        get_visuals_mock.return_value.visual_names = [visual_name, visual_name2]
-        get_visuals_mock.return_value.transparencies = [transparency, transparency2]
+        visual1 = MagicMock()
+        visual1.link_name = link_name
+        visual1.visual_name = visual_name
+        visual1.transparency = transparency
+        visual2 = MagicMock()
+        visual2.link_name = link_name2
+        visual2.visual_name = visual_name2
+        visual2.transparency = transparency2
+        get_visuals_mock.return_value.visuals = [visual1, visual2]
 
         def service_proxy_creator(service_name, service_class):
             if service_name == GazeboServiceName.GET_MODEL_PROPERTIES:
@@ -233,7 +239,6 @@ class BlinkEffectTest(TestCase):
 
         cur_alpha = lerp(min_alpha, max_alpha, 0.0 / interval)
         transparency = 1.0 - cur_alpha
-        transparencies = [transparency]
 
         with patch("deepsim.visual_effects.effects.blink_effect.SetVisualTransparencyTracker") as tracker_mock:
             blink_effect.update(delta_time=delta_time,
@@ -278,9 +283,15 @@ class BlinkEffectTest(TestCase):
         get_visual_names_mock.return_value.link_names = [link_name, link_name2]
         get_visual_names_mock.return_value.visual_names = [visual_name, visual_name2]
         get_visuals_mock = MagicMock()
-        get_visuals_mock.return_value.link_names = [link_name, link_name2]
-        get_visuals_mock.return_value.visual_names = [visual_name, visual_name2]
-        get_visuals_mock.return_value.transparencies = [transparency, transparency2]
+        visual1 = MagicMock()
+        visual1.link_name = link_name
+        visual1.visual_name = visual_name
+        visual1.transparency = transparency
+        visual2 = MagicMock()
+        visual2.link_name = link_name2
+        visual2.visual_name = visual_name2
+        visual2.transparency = transparency2
+        get_visuals_mock.return_value.visuals = [visual1, visual2]
 
         def service_proxy_creator(service_name, service_class):
             if service_name == GazeboServiceName.GET_MODEL_PROPERTIES:
@@ -352,9 +363,15 @@ class BlinkEffectTest(TestCase):
         get_visual_names_mock.return_value.link_names = [link_name, link_name2]
         get_visual_names_mock.return_value.visual_names = [visual_name, visual_name2]
         get_visuals_mock = MagicMock()
-        get_visuals_mock.return_value.link_names = [link_name, link_name2]
-        get_visuals_mock.return_value.visual_names = [visual_name, visual_name2]
-        get_visuals_mock.return_value.transparencies = [transparency, transparency2]
+        visual1 = MagicMock()
+        visual1.link_name = link_name
+        visual1.visual_name = visual_name
+        visual1.transparency = transparency
+        visual2 = MagicMock()
+        visual2.link_name = link_name2
+        visual2.visual_name = visual_name2
+        visual2.transparency = transparency2
+        get_visuals_mock.return_value.visuals = [visual1, visual2]
 
         def service_proxy_creator(service_name, service_class):
             if service_name == GazeboServiceName.GET_MODEL_PROPERTIES:
