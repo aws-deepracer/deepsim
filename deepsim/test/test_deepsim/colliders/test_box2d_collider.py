@@ -18,11 +18,11 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
 import inspect
 
-from deepsim.math.pose import Pose
-from deepsim.math.vector3 import Vector3
-from deepsim.math.point import Point
-from deepsim.math.euler import Euler
-from deepsim.math.ray import Ray
+from deepsim.core.pose import Pose
+from deepsim.core.vector3 import Vector3
+from deepsim.core.point import Point
+from deepsim.core.euler import Euler
+from deepsim.core.ray import Ray
 
 from deepsim.colliders.box2d_collider import Box2DCollider
 from deepsim.colliders.circle2d_collider import Circle2DCollider

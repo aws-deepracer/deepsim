@@ -14,7 +14,7 @@
 #   limitations under the License.                                              #
 #################################################################################
 """A class for blink effect."""
-from deepsim.math.math import lerp
+from deepsim.core.math import lerp
 from deepsim.gazebo.constants import GazeboServiceName
 from deepsim.ros.service_proxy_wrapper import ServiceProxyWrapper
 from deepsim.visual_effects.abs_effect import AbstractEffect

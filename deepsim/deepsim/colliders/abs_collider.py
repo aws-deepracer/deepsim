@@ -20,11 +20,10 @@ from typing import Optional, Union
 from threading import RLock
 
 from deepsim.behaviours.transform import Transform
-from deepsim.math.vector3 import Vector3
-from deepsim.math.point import Point
-from deepsim.math.pose import Pose
-from deepsim.math.ray import Ray
-from deepsim.colliders.hit import Hit
+from deepsim.core.vector3 import Vector3
+from deepsim.core.point import Point
+from deepsim.core.pose import Pose
+from deepsim.colliders.ray_castable import RayCastable
 
 from shapely.geometry.base import BaseGeometry
 
@@ -40,7 +39,7 @@ class ColliderType(Enum):
     COLLIDER_3D = 1
 
 
-class AbstractCollider(ABC):
+class AbstractCollider(RayCastable, metaclass=abc.ABCMeta):
     """
     Abstract Collider class
     """
@@ -255,10 +254,6 @@ class AbstractCollider(ABC):
             bool: True if collider contains target otherwise False.
         """
         raise NotImplementedError("Collider must implement contains!")
-
-    @abc.abstractmethod
-    def raycast(self, ray: Ray) -> Union[Hit, None]:
-        raise NotImplementedError("Collider must implement raycast!")
 
 
 class Abstract2DCollider(AbstractCollider, metaclass=abc.ABCMeta):

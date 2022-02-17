@@ -15,7 +15,7 @@
 #################################################################################
 """A class for twist."""
 from typing import Optional
-from deepsim.math.vector3 import Vector3
+from deepsim.core.vector3 import Vector3
 
 from geometry_msgs.msg import Twist as ROSTwist
 

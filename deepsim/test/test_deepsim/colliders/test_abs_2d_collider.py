@@ -21,12 +21,12 @@ import inspect
 import math
 
 from deepsim.colliders.abs_collider import Abstract2DCollider, ColliderType
-from deepsim.math.pose import Pose
+from deepsim.core.pose import Pose
 from deepsim.behaviours.transform import Transform
-from deepsim.math.vector3 import Vector3
-from deepsim.math.point import Point
-from deepsim.math.euler import Euler
-from deepsim.math.ray import Ray
+from deepsim.core.vector3 import Vector3
+from deepsim.core.point import Point
+from deepsim.core.euler import Euler
+from deepsim.core.ray import Ray
 from deepsim.colliders.hit import Hit
 
 from shapely.geometry.base import BaseGeometry

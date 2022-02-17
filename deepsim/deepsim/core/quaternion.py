@@ -17,7 +17,7 @@
 import math
 from typing import TypeVar, Union, Optional, Iterable, Iterator
 
-from deepsim.math.math import euler_to_quaternion, quaternion_to_euler
+from deepsim.core.math import euler_to_quaternion, quaternion_to_euler
 
 import numpy as np
 
@@ -209,7 +209,7 @@ class Quaternion:
         Returns:
             Euler: new Euler object converted from Quaternion.
         """
-        from deepsim.math.euler import Euler
+        from deepsim.core.euler import Euler
         euler = quaternion_to_euler(x=self.x, y=self.y, z=self.z, w=self.w)
         return Euler(buffer=euler)
 
@@ -309,8 +309,8 @@ class Quaternion:
                         - identity if forward or upwards magnitude is zero.
                         - identity if forward and upwards are colinear.
         """
-        from deepsim.math.vector3 import Vector3
-        from deepsim.math.point import Point
+        from deepsim.core.vector3 import Vector3
+        from deepsim.core.point import Point
 
         forward = forward.to_vector() if isinstance(forward, Point) else forward
         upwards = upwards.to_vector() if isinstance(upwards, Point) else upwards
@@ -423,7 +423,7 @@ class Quaternion:
         Returns:
             Quaternion: new Quaternion object created from euler
         """
-        from deepsim.math.euler import Euler
+        from deepsim.core.euler import Euler
         if isinstance(value, list) or isinstance(value, tuple):
             value = Euler.from_list(value=value)
         elif type(value).__module__ == np.__name__:

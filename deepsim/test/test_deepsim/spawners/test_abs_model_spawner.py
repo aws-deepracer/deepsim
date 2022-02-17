@@ -20,9 +20,9 @@ import inspect
 from typing import Optional
 
 from deepsim.exception import DeepSimException
-from deepsim.math.pose import Pose
-from deepsim.math.point import Point
-from deepsim.math.quaternion import Quaternion
+from deepsim.core.pose import Pose
+from deepsim.core.point import Point
+from deepsim.core.quaternion import Quaternion
 from deepsim.spawners.abs_model_spawner import AbstractModelSpawner
 
 myself: Callable[[], Any] = lambda: inspect.stack()[1][3]

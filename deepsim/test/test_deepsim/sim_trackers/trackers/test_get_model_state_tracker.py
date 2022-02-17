@@ -20,11 +20,11 @@ import inspect
 
 from deepsim.sim_trackers.trackers.get_model_state_tracker import GetModelStateTracker
 from deepsim.gazebo.constants import GazeboServiceName
-from deepsim.math.pose import Pose
-from deepsim.math.twist import Twist
-from deepsim.math.vector3 import Vector3
-from deepsim.math.quaternion import Quaternion
-from deepsim.math.model_state import ModelState
+from deepsim.core.pose import Pose
+from deepsim.core.twist import Twist
+from deepsim.core.vector3 import Vector3
+from deepsim.core.quaternion import Quaternion
+from deepsim.core.model_state import ModelState
 from deepsim.exception import DeepSimException
 
 from deepsim_msgs.srv import (

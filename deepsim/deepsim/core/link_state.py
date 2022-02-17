@@ -13,58 +13,58 @@
 #   See the License for the specific language governing permissions and         #
 #   limitations under the License.                                              #
 #################################################################################
-"""A class for model state."""
+"""A class for link state."""
 from typing import Optional
-from deepsim.math.pose import Pose
-from deepsim.math.twist import Twist
+from deepsim.core.pose import Pose
+from deepsim.core.twist import Twist
 
-from gazebo_msgs.msg import ModelState as ROSModelState
+from gazebo_msgs.msg import LinkState as ROSLinkState
 
 
-class ModelState:
+class LinkState:
     """
-    Model State class
+    LinkState class
     """
 
     def __init__(self,
-                 model_name: Optional[str] = None,
+                 link_name: Optional[str] = None,
                  pose: Optional[Pose] = None,
                  twist: Optional[Twist] = None,
                  reference_frame: Optional[str] = None):
         """
-        Initialize ModelState class
+        Initialize LinkState class
 
         Args:
-            model_name (Optional[str]): model name
+            link_name (Optional[str]): link name
             pose (Optional[Pose]): desired pose in reference frame
             twist (Optional[Twist]): desired twist in reference frame
             reference_frame (Optional[str]): set pose/twist relative to the frame of this entity (Body/Model)
                                    leave empty or "world" or "map" defaults to world-frame
         """
-        self._model_name = model_name
+        self._link_name = link_name
         self._pose = pose.copy() if pose else Pose()
         self._twist = twist.copy() if twist else Twist()
         self._reference_frame = reference_frame or ''
 
     @property
-    def model_name(self) -> str:
+    def link_name(self) -> str:
         """
-        Returns the model name
+        Returns the link name
 
         Returns:
-            str: model name
+            str: link name
         """
-        return self._model_name
+        return self._link_name
 
-    @model_name.setter
-    def model_name(self, value: str) -> None:
+    @link_name.setter
+    def link_name(self, value: str) -> None:
         """
-        Set model name
+        Set link name
 
         Args:
-            value (str): model name
+            value (str): link name
         """
-        self._model_name = value
+        self._link_name = value
 
     @property
     def pose(self) -> Pose:
@@ -72,7 +72,7 @@ class ModelState:
         Returns the copy of pose.
 
         Returns:
-            Pose: the copy of pose of the model
+            Pose: the copy of pose of the link
         """
         return self._pose.copy()
 
@@ -126,71 +126,71 @@ class ModelState:
         """
         self._reference_frame = value
 
-    def to_ros(self) -> ROSModelState:
+    def to_ros(self) -> ROSLinkState:
         """
-        Return the ROS ModelState object created from this model state.
+        Return the ROS LinkState object created from this link state.
 
         Returns:
-            gazebo_msgs.msg.ModelState: ROS ModelState
+            gazebo_msgs.msg.LinkState: ROS LinkState
         """
-        ros_model_state = ROSModelState()
-        if self.model_name:
-            ros_model_state.model_name = self.model_name
+        ros_link_state = ROSLinkState()
+        if self.link_name:
+            ros_link_state.link_name = self.link_name
         if self._pose:
-            ros_model_state.pose = self._pose.to_ros()
+            ros_link_state.pose = self._pose.to_ros()
         if self._twist:
-            ros_model_state.twist = self._twist.to_ros()
+            ros_link_state.twist = self._twist.to_ros()
         if self.reference_frame:
-            ros_model_state.reference_frame = self.reference_frame
-        return ros_model_state
+            ros_link_state.reference_frame = self.reference_frame
+        return ros_link_state
 
     @staticmethod
-    def from_ros(value: ROSModelState) -> 'ModelState':
+    def from_ros(value: ROSLinkState) -> 'LinkState':
         """
-        Returns new ModelState object created from ROS ModelState
+        Returns new LinkState object created from ROS LinkState
 
         Args:
-            value (ROSModelState): ROS ModelState
+            value (ROSLinkState): ROS LinkState
 
         Returns:
-            ModelState: new ModelState object created from ROS LinkState
+            LinkState: new LinkState object created from ROS LinkState
         """
-        return ModelState(model_name=value.model_name,
-                          pose=Pose.from_ros(value.pose),
-                          twist=Twist.from_ros(value.twist),
-                          reference_frame=value.reference_frame)
+        return LinkState(link_name=value.link_name,
+                         pose=Pose.from_ros(value.pose),
+                         twist=Twist.from_ros(value.twist),
+                         reference_frame=value.reference_frame)
 
-    def copy(self) -> 'ModelState':
+    def copy(self) -> 'LinkState':
         """
         Returns a copy.
 
         Returns:
-            ModelState: the copied model state
+            LinkState: the copied link state
         """
-        return ModelState(model_name=self.model_name,
-                          pose=self._pose,
-                          twist=self._twist,
-                          reference_frame=self.reference_frame)
+        return LinkState(link_name=self.link_name,
+                         pose=self._pose,
+                         twist=self._twist,
+                         reference_frame=self.reference_frame)
 
-    def __eq__(self, other: 'ModelState') -> bool:
+    def __eq__(self, other: 'LinkState') -> bool:
         """
-        Equality of ModelState.
+        Equality of LinkState.
 
         Args:
-            other (ModelState): other to compare
+            other (LinkState): other to compare
 
         Returns:
             bool: True if the differences of all components are within epsilon, Otherwise False.
         """
-        return (self.model_name == other.model_name and self.reference_frame == other.reference_frame
+        return (self.link_name == other.link_name and self.reference_frame == other.reference_frame
                 and self._pose == other._pose and self._twist == other._twist)
 
-    def __ne__(self, other: 'ModelState') -> bool:
+    def __ne__(self, other: 'LinkState') -> bool:
         """
         Inequality of points is inequality of any coordinates
 
         Args:
-            other (ModelState): other to compare
+            other (LinkState): other to compare
 
         Returns:
             bool: False if the differences of all components are within epsilon, Otherwise True.
@@ -199,15 +199,15 @@ class ModelState:
 
     def __str__(self) -> str:
         """
-        String representation of a model state
+        String representation of a link state
 
         Returns:
-            str: String representation of a model state
+            str: String representation of a link state
         """
-        return "(model_name=%s, pose=%s, twist=%s, reference_frame=%s)" % (self.model_name,
-                                                                           repr(self._pose),
-                                                                           repr(self._twist),
-                                                                           self.reference_frame)
+        return "(link_name=%s, pose=%s, twist=%s, reference_frame=%s)" % (self.link_name,
+                                                                          repr(self._pose),
+                                                                          repr(self._twist),
+                                                                          self.reference_frame)
 
     def __repr__(self) -> str:
         """
@@ -216,4 +216,4 @@ class ModelState:
         Returns:
             str: String representation including class
         """
-        return "ModelState" + str(self)
+        return "LinkState" + str(self)

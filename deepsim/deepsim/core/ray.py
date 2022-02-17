@@ -15,8 +15,8 @@
 #################################################################################
 """A class for ray."""
 from typing import Optional, Union
-from deepsim.math.vector3 import Vector3
-from deepsim.math.point import Point
+from deepsim.core.vector3 import Vector3
+from deepsim.core.point import Point
 
 
 class Ray:

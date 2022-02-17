@@ -22,9 +22,9 @@ from deepsim.exception import DeepSimException
 from deepsim.gazebo.constants import GazeboServiceName
 from deepsim.sim_trackers.tracker import TrackerInterface
 from deepsim.sim_trackers.tracker_manager import TrackerManager
-from deepsim.math.twist import Twist
-from deepsim.math.pose import Pose
-from deepsim.math.link_state import LinkState
+from deepsim.core.twist import Twist
+from deepsim.core.pose import Pose
+from deepsim.core.link_state import LinkState
 from deepsim.ros.service_proxy_wrapper import ServiceProxyWrapper
 import deepsim.sim_trackers.constants as consts
 

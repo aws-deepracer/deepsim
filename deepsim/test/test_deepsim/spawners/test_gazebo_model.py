@@ -19,7 +19,7 @@ from unittest.mock import patch, MagicMock, call, ANY
 
 from deepsim.gazebo.constants import GazeboServiceName
 from deepsim.spawners.gazebo_model_spawner import GazeboModelSpawner
-from deepsim.math.pose import Pose
+from deepsim.core.pose import Pose
 
 from gazebo_msgs.srv import SpawnModel, DeleteModel
 

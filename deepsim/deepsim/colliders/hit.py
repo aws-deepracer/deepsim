@@ -15,8 +15,8 @@
 #################################################################################
 """A class for hit."""
 from typing import Any
-from deepsim.math.ray import Ray
-from deepsim.math.vector3 import Vector3
+from deepsim.core.ray import Ray
+from deepsim.core.vector3 import Vector3
 
 
 class Hit:

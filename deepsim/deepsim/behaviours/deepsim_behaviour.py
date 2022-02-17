@@ -20,7 +20,7 @@ from typing import Optional, Iterable
 from threading import RLock
 
 from deepsim.behaviours.transform import Transform
-from deepsim.math.pose import Pose
+from deepsim.core.pose import Pose
 from deepsim.spawners.abs_model_spawner import AbstractModelSpawner
 from deepsim.spawners.dummy_spawner import DummySpawner
 from deepsim.exception import DeepSimCallbackError

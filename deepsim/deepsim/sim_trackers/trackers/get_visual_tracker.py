@@ -22,11 +22,11 @@ from deepsim.exception import DeepSimException
 from deepsim.gazebo.constants import GazeboServiceName
 from deepsim.sim_trackers.tracker import TrackerInterface
 from deepsim.sim_trackers.tracker_manager import TrackerManager
-from deepsim.math.vector3 import Vector3
-from deepsim.math.pose import Pose
-from deepsim.math.color import Color
-from deepsim.math.material import Material
-from deepsim.math.visual import Visual
+from deepsim.core.vector3 import Vector3
+from deepsim.core.pose import Pose
+from deepsim.core.color import Color
+from deepsim.core.material import Material
+from deepsim.core.visual import Visual
 from deepsim.ros.service_proxy_wrapper import ServiceProxyWrapper
 import deepsim.sim_trackers.constants as consts
 

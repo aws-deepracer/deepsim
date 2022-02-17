@@ -18,12 +18,12 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
 import inspect
 
-from deepsim.math.model_state import ModelState
-from deepsim.math.pose import Pose
-from deepsim.math.twist import Twist
-from deepsim.math.point import Point
-from deepsim.math.quaternion import Quaternion
-from deepsim.math.vector3 import Vector3
+from deepsim.core.model_state import ModelState
+from deepsim.core.pose import Pose
+from deepsim.core.twist import Twist
+from deepsim.core.point import Point
+from deepsim.core.quaternion import Quaternion
+from deepsim.core.vector3 import Vector3
 
 from gazebo_msgs.msg import ModelState as ROSModelState
 

@@ -15,7 +15,7 @@
 #################################################################################
 """A class for material."""
 from typing import Optional
-from deepsim.math.color import Color
+from deepsim.core.color import Color
 
 
 class Material:

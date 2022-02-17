@@ -15,9 +15,9 @@
 #################################################################################
 """A class for pose."""
 from typing import Optional, Union
-from deepsim.math.point import Point
-from deepsim.math.quaternion import Quaternion
-from deepsim.math.vector3 import Vector3
+from deepsim.core.point import Point
+from deepsim.core.quaternion import Quaternion
+from deepsim.core.vector3 import Vector3
 
 from geometry_msgs.msg import Pose as ROSPose
 

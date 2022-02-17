@@ -19,7 +19,7 @@ from typing import Optional, Iterable
 import threading
 from deepsim.behaviours.deepsim_behaviour import DeepSimBehaviour
 from deepsim.spawners.abs_model_spawner import AbstractModelSpawner
-from deepsim.math.pose import Pose
+from deepsim.core.pose import Pose
 from deepsim.exception import DeepSimCallbackError
 from deepsim.constants import Tag
 

@@ -50,19 +50,19 @@ from .gazebo.constants import (
     GeometryType
 )
 
-from .math.color import Color
-from .math.euler import Euler
-from .math.model_state import ModelState
-from .math.link_state import LinkState
-from .math.material import Material
-from .math.math import lerp, lerp_angle_rad, project_to_2d, dot, cross, magnitude, sqr_magnitude, unit, distance
-from .math.plane import Plane
-from .math.point import Point
-from .math.pose import Pose
-from .math.quaternion import Quaternion
-from .math.ray import Ray
-from .math.twist import Twist
-from .math.vector3 import Vector3
+from .core.color import Color
+from .core.euler import Euler
+from .core.model_state import ModelState
+from .core.link_state import LinkState
+from .core.material import Material
+from .core.math import lerp, lerp_angle_rad, project_to_2d, dot, cross, magnitude, sqr_magnitude, unit, distance
+from .core.plane import Plane
+from .core.point import Point
+from .core.pose import Pose
+from .core.quaternion import Quaternion
+from .core.ray import Ray
+from .core.twist import Twist
+from .core.vector3 import Vector3
 
 from .ros.service_proxy_wrapper import ServiceProxyWrapper
 from .ros.ros_util import ROSUtil

@@ -20,8 +20,8 @@ import inspect
 
 from deepsim.sim_trackers.trackers.set_visual_material_tracker import SetVisualMaterialTracker
 from deepsim.gazebo.constants import GazeboServiceName
-from deepsim.math.color import Color
-from deepsim.math.material import Material
+from deepsim.core.color import Color
+from deepsim.core.material import Material
 
 from deepsim_msgs.srv import (
     SetVisualMaterials, SetVisualMaterialsRequest, SetVisualMaterialsResponse,

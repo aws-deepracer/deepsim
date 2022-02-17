@@ -20,9 +20,9 @@ import inspect
 
 import math
 
-from deepsim.math.quaternion import Quaternion
-from deepsim.math.vector3 import Vector3
-from deepsim.math.euler import Euler
+from deepsim.core.quaternion import Quaternion
+from deepsim.core.vector3 import Vector3
+from deepsim.core.euler import Euler
 import numpy as np
 
 from geometry_msgs.msg import Quaternion as ROSQuaternion
@@ -127,7 +127,7 @@ class QuaternionTest(TestCase):
         assert np.all(quaternion_np == expected_np_array)
 
     def test_to_euler(self):
-        from deepsim.math.euler import Euler
+        from deepsim.core.euler import Euler
         quaternion = Quaternion(0.1238415000204839,
                                 0.3500188726294279,
                                 0.24871879769645677,
@@ -174,7 +174,7 @@ class QuaternionTest(TestCase):
         assert quaternion == Quaternion(0.5, 0.6, 0.7, 0.8)
 
     def test_from_euler(self):
-        from deepsim.math.euler import Euler
+        from deepsim.core.euler import Euler
         euler = Euler(0.5, 0.6, 0.7)
 
         quaternion = Quaternion.from_euler(euler)

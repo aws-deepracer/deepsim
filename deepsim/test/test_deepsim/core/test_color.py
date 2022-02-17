@@ -18,7 +18,7 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
 import inspect
 
-from deepsim.math.color import Color
+from deepsim.core.color import Color
 from std_msgs.msg import ColorRGBA
 import numpy as np
 

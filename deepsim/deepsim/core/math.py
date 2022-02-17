@@ -105,9 +105,9 @@ def project_to_2d(point_on_plane: Union[Point, Vector3],
     Returns:
         Tuple[float, float]: x and y in 2d space scaled between 0.0 and 1.0.
     """
-    from deepsim.math.vector3 import Vector3
-    from deepsim.math.quaternion import Quaternion
-    from deepsim.math.euler import Euler
+    from deepsim.core.vector3 import Vector3
+    from deepsim.core.quaternion import Quaternion
+    from deepsim.core.euler import Euler
     point_on_plane = point_on_plane if isinstance(point_on_plane, Vector3) else point_on_plane.to_vector()
     plane_center = plane_center if isinstance(plane_center, Vector3) else plane_center.to_vector()
 
@@ -244,7 +244,7 @@ def distance(a: Union[Point, Vector3], b: Union[Point, Vector3]) -> float:
     Returns:
         float: (a - b).manitude
     """
-    from deepsim.math.vector3 import Vector3
+    from deepsim.core.vector3 import Vector3
     a = a if isinstance(a, Vector3) else a.to_vector()
     b = b if isinstance(b, Vector3) else b.to_vector()
     diff = a - b

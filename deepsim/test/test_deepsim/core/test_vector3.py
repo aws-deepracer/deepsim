@@ -21,10 +21,10 @@ import inspect
 import numpy as np
 import math
 
-from deepsim.math.point import Point
-from deepsim.math.vector3 import Vector3
-from deepsim.math.euler import Euler
-from deepsim.math.quaternion import Quaternion
+from deepsim.core.point import Point
+from deepsim.core.vector3 import Vector3
+from deepsim.core.euler import Euler
+from deepsim.core.quaternion import Quaternion
 from deepsim.gazebo.constants import GazeboWorld
 
 from geometry_msgs.msg import Vector3 as ROSVector3

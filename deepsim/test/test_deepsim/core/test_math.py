@@ -20,10 +20,10 @@ import inspect
 
 import math
 
-from deepsim.math import math as deepsim_math
-from deepsim.math.quaternion import Quaternion
-from deepsim.math.euler import Euler
-from deepsim.math.vector3 import Vector3
+from deepsim.core import math as deepsim_math
+from deepsim.core.quaternion import Quaternion
+from deepsim.core.euler import Euler
+from deepsim.core.vector3 import Vector3
 
 
 class MathTest(TestCase):

@@ -18,8 +18,8 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
 import inspect
 
-from deepsim.math.material import Material
-from deepsim.math.color import Color
+from deepsim.core.material import Material
+from deepsim.core.color import Color
 
 myself: Callable[[], Any] = lambda: inspect.stack()[1][3]
 

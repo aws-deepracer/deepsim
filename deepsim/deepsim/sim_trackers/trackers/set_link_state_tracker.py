@@ -22,7 +22,7 @@ from deepsim.sim_trackers.tracker import TrackerInterface
 from deepsim.sim_trackers.tracker_manager import TrackerManager
 from deepsim.ros.service_proxy_wrapper import ServiceProxyWrapper
 import deepsim.sim_trackers.constants as consts
-from deepsim.math.link_state import LinkState
+from deepsim.core.link_state import LinkState
 from deepsim.sim_trackers.trackers.get_link_state_tracker import GetLinkStateTracker
 
 from deepsim_msgs.srv import SetLinkStates, SetLinkStatesResponse

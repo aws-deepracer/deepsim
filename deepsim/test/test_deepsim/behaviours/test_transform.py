@@ -22,14 +22,14 @@ import math
 
 from deepsim.behaviours.transform import Transform
 from deepsim.gazebo.constants import GazeboServiceName
-from deepsim.math.color import Color
-from deepsim.math.pose import Pose
-from deepsim.math.twist import Twist
-from deepsim.math.vector3 import Vector3
-from deepsim.math.quaternion import Quaternion
-from deepsim.math.euler import Euler
-from deepsim.math.material import Material
-from deepsim.math.model_state import ModelState
+from deepsim.core.color import Color
+from deepsim.core.pose import Pose
+from deepsim.core.twist import Twist
+from deepsim.core.vector3 import Vector3
+from deepsim.core.quaternion import Quaternion
+from deepsim.core.euler import Euler
+from deepsim.core.material import Material
+from deepsim.core.model_state import ModelState
 from deepsim.exception import DeepSimException
 
 from gazebo_msgs.srv import GetModelProperties, GetModelPropertiesRequest

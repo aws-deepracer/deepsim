@@ -20,9 +20,9 @@ import inspect
 
 from deepsim.behaviours.deepsim_behaviour import DeepSimBehaviour
 from deepsim.spawners.abs_model_spawner import AbstractModelSpawner
-from deepsim.math.pose import Pose
-from deepsim.math.vector3 import Vector3
-from deepsim.math.quaternion import Quaternion
+from deepsim.core.pose import Pose
+from deepsim.core.vector3 import Vector3
+from deepsim.core.quaternion import Quaternion
 from deepsim.spawners.dummy_spawner import DummySpawner
 from deepsim.exception import DeepSimCallbackError
 

@@ -18,7 +18,7 @@ import abc
 from threading import RLock
 from typing import Optional
 
-from deepsim.math.pose import Pose
+from deepsim.core.pose import Pose
 from deepsim.ros.ros_util import ROSUtil
 
 import rospy

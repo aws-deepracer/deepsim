@@ -18,10 +18,10 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
 import inspect
 
-from deepsim.math.plane import Plane
-from deepsim.math.point import Point
-from deepsim.math.vector3 import Vector3
-from deepsim.math.ray import Ray
+from deepsim.core.plane import Plane
+from deepsim.core.point import Point
+from deepsim.core.vector3 import Vector3
+from deepsim.core.ray import Ray
 
 myself: Callable[[], Any] = lambda: inspect.stack()[1][3]
 

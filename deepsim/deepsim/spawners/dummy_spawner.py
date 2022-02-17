@@ -17,7 +17,7 @@
 from typing import Optional
 
 from deepsim.spawners.abs_model_spawner import AbstractModelSpawner
-from deepsim.math.pose import Pose
+from deepsim.core.pose import Pose
 
 
 class DummySpawner(AbstractModelSpawner):

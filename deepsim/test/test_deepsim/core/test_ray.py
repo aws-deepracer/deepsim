@@ -18,9 +18,9 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
 import inspect
 
-from deepsim.math.ray import Ray
-from deepsim.math.vector3 import Vector3
-from deepsim.math.point import Point
+from deepsim.core.ray import Ray
+from deepsim.core.vector3 import Vector3
+from deepsim.core.point import Point
 
 
 class RayTest(TestCase):

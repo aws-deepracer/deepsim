@@ -26,8 +26,8 @@ from deepsim.domain_randomizations.constants import (
 from deepsim.gazebo.constants import GazeboServiceName
 from deepsim.sim_trackers.trackers.set_visual_material_tracker import SetVisualMaterialTracker
 from deepsim.ros.service_proxy_wrapper import ServiceProxyWrapper
-from deepsim.math.color import Color
-from deepsim.math.material import Material
+from deepsim.core.color import Color
+from deepsim.core.material import Material
 
 from gazebo_msgs.srv import GetModelProperties, GetModelPropertiesRequest
 from deepsim_msgs.srv import GetVisualNames, GetVisualNamesRequest

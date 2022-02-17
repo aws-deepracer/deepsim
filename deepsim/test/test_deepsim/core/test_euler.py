@@ -18,7 +18,7 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
 import inspect
 
-from deepsim.math.euler import Euler
+from deepsim.core.euler import Euler
 import numpy as np
 
 
@@ -75,7 +75,7 @@ class EulerTest(TestCase):
         assert np.all(euler_np == expected_np_array)
 
     def test_to_quaternion(self):
-        from deepsim.math.quaternion import Quaternion
+        from deepsim.core.quaternion import Quaternion
         euler = Euler(0.5, 0.6, 0.7)
         quat = euler.to_quaternion()
         expected_quat = Quaternion(0.1238415000204839,
@@ -97,7 +97,7 @@ class EulerTest(TestCase):
         assert euler == Euler(0.5, 0.6, 0.7)
 
     def test_from_quaternion(self):
-        from deepsim.math.quaternion import Quaternion
+        from deepsim.core.quaternion import Quaternion
         quat = Quaternion(0.1238415000204839,
                           0.3500188726294279,
                           0.24871879769645677,

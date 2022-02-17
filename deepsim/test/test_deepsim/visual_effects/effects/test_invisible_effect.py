@@ -20,7 +20,7 @@ import inspect
 
 from deepsim.visual_effects.effects.invisible_effect import InvisibleEffect
 from deepsim.gazebo.constants import GazeboServiceName
-from deepsim.math.math import lerp
+from deepsim.core.math import lerp
 
 from gazebo_msgs.srv import GetModelProperties, GetModelPropertiesRequest
 from deepsim_msgs.srv import (

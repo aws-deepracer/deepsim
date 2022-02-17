@@ -16,7 +16,7 @@
 """A class for euler."""
 from typing import TypeVar, Union, Iterable, Optional, Iterator
 import numpy as np
-from deepsim.math.math import euler_to_quaternion, quaternion_to_euler
+from deepsim.core.math import euler_to_quaternion, quaternion_to_euler
 Quaternion = TypeVar('Quaternion')
 
 
@@ -146,7 +146,7 @@ class Euler:
         Returns:
             Quaternion: new Quaternion object converted from Euler.
         """
-        from deepsim.math.quaternion import Quaternion
+        from deepsim.core.quaternion import Quaternion
         q = euler_to_quaternion(roll=self.roll, pitch=self.pitch, yaw=self.yaw)
         return Quaternion(*q)
 
@@ -187,7 +187,7 @@ class Euler:
         Returns:
             Euler: new Euler object created from quaternion
         """
-        from deepsim.math.quaternion import Quaternion
+        from deepsim.core.quaternion import Quaternion
         if isinstance(value, list) or isinstance(value, tuple):
             value = Quaternion.from_list(value)
         elif type(value).__module__ == np.__name__:

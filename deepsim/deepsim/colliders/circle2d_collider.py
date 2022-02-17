@@ -17,9 +17,9 @@
 from typing import Optional, Union
 
 from deepsim.behaviours.transform import Transform
-from deepsim.math.pose import Pose
-from deepsim.math.plane import Plane
-from deepsim.math.ray import Ray
+from deepsim.core.pose import Pose
+from deepsim.core.plane import Plane
+from deepsim.core.ray import Ray
 from deepsim.colliders.hit import Hit
 from deepsim.colliders.abs_collider import Abstract2DCollider
 from deepsim.gazebo.constants import GazeboWorld

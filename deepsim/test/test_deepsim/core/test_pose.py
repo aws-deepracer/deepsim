@@ -18,9 +18,9 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
 import inspect
 
-from deepsim.math.pose import Pose
-from deepsim.math.point import Point
-from deepsim.math.quaternion import Quaternion
+from deepsim.core.pose import Pose
+from deepsim.core.point import Point
+from deepsim.core.quaternion import Quaternion
 
 from geometry_msgs.msg import Pose as ROSPose
 

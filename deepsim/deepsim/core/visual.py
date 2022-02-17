@@ -15,10 +15,10 @@
 #################################################################################
 """A class for visual."""
 from typing import Optional, Union
-from deepsim.math.color import Color
-from deepsim.math.vector3 import Vector3
-from deepsim.math.pose import Pose
-from deepsim.math.material import Material
+from deepsim.core.color import Color
+from deepsim.core.vector3 import Vector3
+from deepsim.core.pose import Pose
+from deepsim.core.material import Material
 from deepsim.gazebo.constants import GeometryType
 
 from deepsim_msgs.msg import Visual as ROSVisual

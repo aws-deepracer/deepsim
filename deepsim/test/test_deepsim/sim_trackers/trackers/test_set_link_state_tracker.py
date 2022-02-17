@@ -20,11 +20,11 @@ import inspect
 
 from deepsim.sim_trackers.trackers.set_link_state_tracker import SetLinkStateTracker
 from deepsim.gazebo.constants import GazeboServiceName
-from deepsim.math.pose import Pose
-from deepsim.math.twist import Twist
-from deepsim.math.vector3 import Vector3
-from deepsim.math.quaternion import Quaternion
-from deepsim.math.link_state import LinkState
+from deepsim.core.pose import Pose
+from deepsim.core.twist import Twist
+from deepsim.core.vector3 import Vector3
+from deepsim.core.quaternion import Quaternion
+from deepsim.core.link_state import LinkState
 
 from deepsim_msgs.srv import SetLinkStates, SetLinkStatesResponse
 from gazebo_msgs.srv import SetLinkState, SetLinkStateResponse

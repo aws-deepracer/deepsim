@@ -18,8 +18,8 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
 import inspect
 
-from deepsim.math.twist import Twist
-from deepsim.math.vector3 import Vector3
+from deepsim.core.twist import Twist
+from deepsim.core.vector3 import Vector3
 
 from geometry_msgs.msg import Twist as ROSTwist
 

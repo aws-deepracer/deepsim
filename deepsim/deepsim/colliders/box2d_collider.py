@@ -17,11 +17,11 @@
 from typing import Optional, List, Union
 
 from deepsim.behaviours.transform import Transform
-from deepsim.math.vector3 import Vector3
-from deepsim.math.point import Point
-from deepsim.math.pose import Pose
-from deepsim.math.plane import Plane
-from deepsim.math.ray import Ray
+from deepsim.core.vector3 import Vector3
+from deepsim.core.point import Point
+from deepsim.core.pose import Pose
+from deepsim.core.plane import Plane
+from deepsim.core.ray import Ray
 from deepsim.colliders.hit import Hit
 from deepsim.colliders.abs_collider import Abstract2DCollider
 from deepsim.gazebo.constants import GazeboWorld

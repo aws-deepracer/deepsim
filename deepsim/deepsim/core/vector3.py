@@ -145,7 +145,7 @@ class Vector3:
         Returns:
             Vector3: interpolated vector3
         """
-        from deepsim.math.point import Point
+        from deepsim.core.point import Point
         a = a.to_vector() if isinstance(a, Point) else a
         b = b.to_vector() if isinstance(b, Point) else b
         t = np.clip(t, 0.0, 1.0).item()
@@ -166,7 +166,7 @@ class Vector3:
         Returns:
             Vector3: interpolated vector3
         """
-        from deepsim.math.point import Point
+        from deepsim.core.point import Point
         a = a.to_vector() if isinstance(a, Point) else a
         b = b.to_vector() if isinstance(b, Point) else b
         t = np.clip(t, 0.0, 1.0).item()
@@ -437,7 +437,7 @@ class Vector3:
         Returns:
             Point: Point containing x, y, z
         """
-        from deepsim.math.point import Point
+        from deepsim.core.point import Point
         return Point(buffer=self._buffer)
 
     @staticmethod
@@ -528,7 +528,7 @@ class Vector3:
         Returns:
             Vector3: a vector sum.
         """
-        from deepsim.math.point import Point
+        from deepsim.core.point import Point
         if isinstance(other, Point) or isinstance(other, Vector3):
             return Vector3(buffer=self.buffer + other.buffer)
         return NotImplemented
@@ -543,7 +543,7 @@ class Vector3:
         Returns:
             Vector3: a vector difference.
         """
-        from deepsim.math.point import Point
+        from deepsim.core.point import Point
         if isinstance(other, Point) or isinstance(other, Vector3):
             return Vector3(buffer=self.buffer - other.buffer)
         return NotImplemented
@@ -558,7 +558,7 @@ class Vector3:
         Returns:
             Vector3: v * scale
         """
-        from deepsim.math.point import Point
+        from deepsim.core.point import Point
         if isinstance(other, float) or isinstance(other, int):
             return Vector3(buffer=self.buffer * other)
         if isinstance(other, Vector3) or isinstance(other, Point):
@@ -575,7 +575,7 @@ class Vector3:
         Returns:
             Vector3: scale * v or Q * v
         """
-        from deepsim.math.quaternion import Quaternion
+        from deepsim.core.quaternion import Quaternion
         if isinstance(other, float) or isinstance(other, int):
             return self.__mul__(other)
         if isinstance(other, Quaternion):
@@ -607,7 +607,7 @@ class Vector3:
         Returns:
             Vector3: self += other
         """
-        from deepsim.math.point import Point
+        from deepsim.core.point import Point
         if isinstance(other, Vector3) or isinstance(other, Point):
             self._buffer += other.buffer
         else:
@@ -624,7 +624,7 @@ class Vector3:
         Returns:
             Vector3: self -= other
         """
-        from deepsim.math.point import Point
+        from deepsim.core.point import Point
         if isinstance(other, Vector3) or isinstance(other, Point):
             self._buffer -= other.buffer
         else:
@@ -641,7 +641,7 @@ class Vector3:
         Returns:
             Vector3: self *= other
         """
-        from deepsim.math.point import Point
+        from deepsim.core.point import Point
         if isinstance(other, Vector3) or isinstance(other, Point):
             self._buffer *= other.buffer
         elif isinstance(other, float) or isinstance(other, int):

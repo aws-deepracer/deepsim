@@ -18,12 +18,12 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock, call
 import inspect
 
-from deepsim.math.visual import Visual
-from deepsim.math.color import Color
-from deepsim.math.vector3 import Vector3
-from deepsim.math.pose import Pose
-from deepsim.math.quaternion import Quaternion
-from deepsim.math.material import Material
+from deepsim.core.visual import Visual
+from deepsim.core.color import Color
+from deepsim.core.vector3 import Vector3
+from deepsim.core.pose import Pose
+from deepsim.core.quaternion import Quaternion
+from deepsim.core.material import Material
 from deepsim.gazebo.constants import GeometryType
 
 from deepsim_msgs.msg import Visual as ROSVisual

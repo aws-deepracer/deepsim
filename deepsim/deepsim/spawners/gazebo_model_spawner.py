@@ -17,7 +17,7 @@
 from threading import RLock
 
 from deepsim.gazebo.constants import GazeboServiceName
-from deepsim.math.pose import Pose
+from deepsim.core.pose import Pose
 from deepsim.ros.service_proxy_wrapper import ServiceProxyWrapper
 
 import rospy

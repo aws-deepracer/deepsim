@@ -24,9 +24,9 @@ from deepsim.sim_trackers.trackers.set_visual_material_tracker import SetVisualM
 from deepsim.sim_trackers.trackers.set_visual_transparency_tracker import SetVisualTransparencyTracker
 from deepsim.sim_trackers.trackers.set_visual_visible_tracker import SetVisualVisibleTracker
 from deepsim.ros.ros_util import ROSUtil
-from deepsim.math.vector3 import Vector3
-from deepsim.math.material import Material
-from deepsim.math.model_state import ModelState
+from deepsim.core.vector3 import Vector3
+from deepsim.core.material import Material
+from deepsim.core.model_state import ModelState
 from deepsim.ros.service_proxy_wrapper import ServiceProxyWrapper
 from deepsim.gazebo.constants import GazeboServiceName
 from deepsim.exception import DeepSimException
