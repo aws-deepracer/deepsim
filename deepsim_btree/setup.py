@@ -39,21 +39,26 @@ package_name = "deepsim-btree"
 # Declare minimal set for installation
 required_packages = [
     "setuptools",
+]
+
+
+test_required_packages = [
     "flake8>=3.5,<4.0.0",
     "pytest-flake8==1.0.7",
     "pytest-pep257==0.0.5",
     "pytest-timeout==1.4.2",
 ]
 
+
 setup_args = {
     "name": package_name,
     "version": read_version(),
     "packages": find_packages(where=".", exclude="test"),
     "package_dir": {"": "."},
-    "description": "Behaviour Tree library for DeepSim framework.",
+    "description": "A Behaviour Tree library for DeepSim Toolkit.",
     "long_description": read("README.md"),
     "author": "Amazon Web Services",
-    "url": "https://github.com/aws-deepracer/deepsim",
+    "url": "https://github.com/aws-deepracer/deepsim/tree/main/deepsim_btree",
     "license": "Apache License 2.0",
     "keywords": "ML RL Amazon AWS AI DeepSim",
     "classifiers": [
@@ -67,6 +72,7 @@ setup_args = {
         "Programming Language :: Python :: 3.8",
     ],
     "install_requires": required_packages,
+    "tests_require": test_required_packages,
 }
 
 try:

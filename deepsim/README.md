@@ -1,17 +1,11 @@
-## My Project
+## DeepSim Gazebo Framework
 
-TODO: Fill this README out!
-
-Be sure to:
-
-* Change the title in this README
-* Edit your repository description on GitHub
-
-## Security
-
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+The DeepSim Gaezebo Framework package is a part of DeepSim Toolkit that provides buildinig blocks to create a RL environment in ROS-Gazebo platform. 
 
 ## License
 
-This project is licensed under the Apache-2.0 License.
+The source code is released under [Apache 2.0](https://aws.amazon.com/apache-2-0/).
 
+## Resources
+* [DeepSim Gazebo Plugin](https://github.com/aws-deepracer/deepsim/tree/main/deepsim_gazebo_plugin)
+* [Unified Distributed Environment](https://github.com/aws-deepracer/ude)

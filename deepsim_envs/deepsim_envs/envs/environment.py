@@ -30,6 +30,7 @@ from deepsim import (
 from ude import (
     MultiAgentDict,
     UDEStepResult,
+    UDEResetResult,
     AgentID,
     Space
 )
@@ -60,12 +61,12 @@ class Environment(ROSEnvironmentInterface):
         self.unpause_physics = ServiceProxyWrapper(GazeboServiceName.UNPAUSE_PHYSICS, Empty)
         self.reset()
 
-    def reset(self) -> MultiAgentDict:
+    def reset(self) -> UDEResetResult:
         """
         Reset the environment
 
         Returns:
-            MultiAgentDict: new observations for each of the agents in the environment.
+            UDEResetResult: new observations for each of the agents and info of the environment.
         """
         with self._lock:
             # Reset the area.
@@ -87,9 +88,9 @@ class Environment(ROSEnvironmentInterface):
             self.unpause_physics(EmptyRequest())
             next_state_dict = {agent.name: agent.get_next_state() for agent in agents}
             self.pause_physics(EmptyRequest())
-
+            info = self._area.get_info() or {}
             [agent.on_episode_begin() for agent in agents]
-            return next_state_dict
+            return next_state_dict, info
 
     def step(self, action_dict: MultiAgentDict) -> UDEStepResult:
         """

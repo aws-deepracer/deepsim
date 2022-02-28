@@ -54,6 +54,7 @@ class EnvironmentTest(TestCase):
         agent_mock.name = myself()
         agent_mock.tags = {Tag.AGENT}
         next_state_mock = MagicMock()
+        info_mock = MagicMock()
         agent_mock.get_next_state.return_value = next_state_mock
         BehaviourManager.get_instance().add(agent_mock)
 
@@ -70,9 +71,11 @@ class EnvironmentTest(TestCase):
 
         area_mock = MagicMock()
         area_mock.get_agents.return_value = [agent_mock]
+        area_mock.get_info.return_value = info_mock
         env = Environment(area=area_mock)
-        next_state = env.reset()
+        next_state, info = env.reset()
         assert next_state[myself()] == next_state_mock
+        assert info == info_mock
         assert area_mock.reset.call_count == 2
         assert agent_mock.reset.call_count == 2
         assert agent_mock.get_next_state.call_count == 2

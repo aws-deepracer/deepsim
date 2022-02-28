@@ -42,18 +42,43 @@ required_packages = [
     "setuptools",
     "numpy>=1.20.0",
     "Shapely>=1.7.0,<1.8",
+]
+
+
+test_required_packages = [
     "flake8>=3.5,<4.0.0",
     "pytest-flake8==1.0.7",
     "pytest-pep257==0.0.5",
-    "pytest-timeout==1.4.2"
+    "pytest-timeout==1.4.2",
 ]
 
-PACKAGE_IMPORT = generate_distutils_setup(
-    name=package_name,
-    version=read_version(),
-    packages=find_packages(where=".", exclude="test"),
-    package_dir={"": "."},
-    install_requires=required_packages
-)
+setup_args = {
+    "name": package_name,
+    "version": read_version(),
+    "packages": find_packages(where=".", exclude="test"),
+    "package_dir": {"": "."},
+    "description": "Open source library to provide building block to build an RL environment in ROS-Gazebo platform.",
+    "long_description": read("README.md"),
+    "long_description_content_type": 'text/markdown',
+    "author": "Amazon Web Services",
+    "url": "https://github.com/aws-deepracer/deepsim/tree/main/deepsim",
+    "license": "Apache License 2.0",
+    "keywords": "ML RL Amazon AWS AI DeepRacer",
+    "classifiers": [
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "Natural Language :: English",
+        "License :: OSI Approved :: Apache Software License",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+    ],
+    "install_requires": required_packages,
+    "tests_require": test_required_packages,
+}
+
+PACKAGE_IMPORT = generate_distutils_setup(**setup_args)
 
 setup(**PACKAGE_IMPORT)

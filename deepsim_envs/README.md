@@ -1,17 +1,11 @@
-## My Project
+## DeepSimEnvs
 
-TODO: Fill this README out!
-
-Be sure to:
-
-* Change the title in this README
-* Edit your repository description on GitHub
-
-## Security
-
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+The DeepSimEnv package is a part of DeepSim Toolkit that provides interfaces to build UDE compatible environment. 
 
 ## License
 
-This project is licensed under the Apache-2.0 License.
+The source code is released under [Apache 2.0](https://aws.amazon.com/apache-2-0/).
 
+## Resources
+* [DeepSim Gazebo Framework](https://github.com/aws-deepracer/deepsim/tree/main/deepsim)
+* [DeepSim Messages](https://github.com/aws-deepracer/deepsim/tree/main/deepsim_msgs)
