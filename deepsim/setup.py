@@ -40,7 +40,7 @@ package_name = "deepsim"
 # Declare minimal set for installation
 required_packages = [
     "setuptools",
-    "numpy>=1.20.0",
+    "numpy>=1.19.5",
     "Shapely>=1.7.0,<1.8",
 ]
 
