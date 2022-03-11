@@ -41,3 +41,19 @@ class DeepSimTest(TestCase):
             deepsim = DeepSim(is_singleton=False)
             deepsim.stop()
             tracker_manager_mock.get_instance.return_value.stop.assert_called_once()
+
+    def test_pause(self):
+        with patch("deepsim.sim_trackers.tracker_manager.TrackerManager") as tracker_manager_mock, \
+                patch("deepsim.ros.ros_util.ROSUtil") as ros_util_mock:
+            deepsim = DeepSim(is_singleton=False)
+            deepsim.pause()
+            tracker_manager_mock.get_instance.return_value.pause.assert_called_once()
+            ros_util_mock.pause_physics.assert_called_once()
+
+    def test_resume(self):
+        with patch("deepsim.sim_trackers.tracker_manager.TrackerManager") as tracker_manager_mock, \
+                patch("deepsim.ros.ros_util.ROSUtil") as ros_util_mock:
+            deepsim = DeepSim(is_singleton=False)
+            deepsim.resume()
+            tracker_manager_mock.get_instance.return_value.resume.assert_called_once()
+            ros_util_mock.unpause_physics.assert_called_once()

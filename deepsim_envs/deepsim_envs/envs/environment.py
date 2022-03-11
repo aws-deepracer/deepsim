@@ -21,9 +21,8 @@ from typing import Dict
 from deepsim_envs.envs.area_interface import AreaInterface
 
 from deepsim import (
+    DeepSim,
     BehaviourManager,
-    ServiceProxyWrapper,
-    GazeboServiceName,
     DeepSimException
 )
 
@@ -57,8 +56,6 @@ class Environment(ROSEnvironmentInterface):
         """
         self._lock = RLock()
         self._area = area
-        self.pause_physics = ServiceProxyWrapper(GazeboServiceName.PAUSE_PHYSICS, Empty)
-        self.unpause_physics = ServiceProxyWrapper(GazeboServiceName.UNPAUSE_PHYSICS, Empty)
         self.reset()
 
     def reset(self) -> UDEResetResult:
@@ -72,9 +69,9 @@ class Environment(ROSEnvironmentInterface):
             # Reset the area.
             # During resetting area, there might be spawning/deletion of models.
             # Thus, we need to unpause physics prior to area reset.
-            self.unpause_physics(EmptyRequest())
+            DeepSim.get_instance().resume()
             self._area.reset()
-            self.pause_physics(EmptyRequest())
+            DeepSim.get_instance().pause()
 
             agents = list(self._area.get_agents())
             if len(agents) <= 0:
@@ -85,9 +82,9 @@ class Environment(ROSEnvironmentInterface):
 
             # Get next observation of all agents in the area.
             # Requires to unpause physics in order to get next sensor data.
-            self.unpause_physics(EmptyRequest())
+            DeepSim.get_instance().resume()
             next_state_dict = {agent.name: agent.get_next_state() for agent in agents}
-            self.pause_physics(EmptyRequest())
+            DeepSim.get_instance().pause()
             info = self._area.get_info() or {}
             [agent.on_episode_begin() for agent in agents]
             return next_state_dict, info
@@ -108,9 +105,9 @@ class Environment(ROSEnvironmentInterface):
             action_dict = {agent.name: action_dict[agent.name] if agent.name in action_dict else None
                            for agent in agents}
             [agent.act(action_dict[agent.name]) for agent in agents]
-            self.unpause_physics(EmptyRequest())
+            DeepSim.get_instance().resume()
             next_state_dict = {agent.name: agent.get_next_state() for agent in agents}
-            self.pause_physics(EmptyRequest())
+            DeepSim.get_instance().pause()
             BehaviourManager.get_instance().update()
 
             reward_dict = {agent.name: agent.last_step_reward for agent in agents}

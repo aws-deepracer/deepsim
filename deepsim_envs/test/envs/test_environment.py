@@ -32,24 +32,20 @@ from std_srvs.srv import Empty, EmptyRequest
 myself: Callable[[], Any] = lambda: inspect.stack()[1][3]
 
 
-@patch("deepsim_envs.envs.environment.ServiceProxyWrapper")
+@patch("deepsim_envs.envs.environment.DeepSim")
 class EnvironmentTest(TestCase):
     def setUp(self) -> None:
         pass
 
-    def test_initialize(self, service_proxy_wrapper_mock):
+    def test_initialize(self, deepsim_mock):
         agent_mock = MagicMock()
         area_mock = MagicMock()
         area_mock.get_agents.return_value = [agent_mock]
         env = Environment(area=area_mock)
-        service_proxy_wrapper_mock.has_call(
-            call(GazeboServiceName.PAUSE_PHYSICS, Empty),
-            call(GazeboServiceName.UNPAUSE_PHYSICS, Empty),
-        )
         assert area_mock == env._area
         area_mock.reset.assert_called_once()
 
-    def test_reset(self, service_proxy_wrapper_mock):
+    def test_reset(self, deepsim_mock):
         agent_mock = MagicMock()
         agent_mock.name = myself()
         agent_mock.tags = {Tag.AGENT}
@@ -57,17 +53,6 @@ class EnvironmentTest(TestCase):
         info_mock = MagicMock()
         agent_mock.get_next_state.return_value = next_state_mock
         BehaviourManager.get_instance().add(agent_mock)
-
-        pause_physics_mock = MagicMock()
-        unpause_physics_mock = MagicMock()
-
-        def service_creator(service_name, service_class):
-            if service_name == GazeboServiceName.PAUSE_PHYSICS:
-                return pause_physics_mock
-            if service_name == GazeboServiceName.UNPAUSE_PHYSICS:
-                return unpause_physics_mock
-            raise Exception("Unknown service name given: {}".format(service_name))
-        service_proxy_wrapper_mock.side_effect = service_creator
 
         area_mock = MagicMock()
         area_mock.get_agents.return_value = [agent_mock]
@@ -80,10 +65,12 @@ class EnvironmentTest(TestCase):
         assert agent_mock.reset.call_count == 2
         assert agent_mock.get_next_state.call_count == 2
         assert agent_mock.on_episode_begin.call_count == 2
-        assert pause_physics_mock.call_count == 4
-        assert unpause_physics_mock.call_count == 4
 
-    def test_step(self, service_proxy_wrapper_mock):
+        deepsim_mock_instance = deepsim_mock.get_instance.return_value
+        assert deepsim_mock_instance.pause.call_count == 4
+        assert deepsim_mock_instance.resume.call_count == 4
+
+    def test_step(self, deepsim_mock):
         agent_mock = MagicMock()
         agent_mock.name = myself()
         agent_mock.tags = {Tag.AGENT}
@@ -93,18 +80,6 @@ class EnvironmentTest(TestCase):
         agent_mock.done = False
         BehaviourManager.get_instance().add(agent_mock)
 
-        pause_physics_mock = MagicMock()
-        unpause_physics_mock = MagicMock()
-
-        def service_creator(service_name, service_class):
-            if service_name == GazeboServiceName.PAUSE_PHYSICS:
-                return pause_physics_mock
-            if service_name == GazeboServiceName.UNPAUSE_PHYSICS:
-                return unpause_physics_mock
-            raise Exception("Unknown service name given: {}".format(service_name))
-
-        service_proxy_wrapper_mock.side_effect = service_creator
-
         area_mock = MagicMock()
         area_mock.get_agents.return_value = [agent_mock]
         env = Environment(area=area_mock)
@@ -113,15 +88,17 @@ class EnvironmentTest(TestCase):
         agent_mock.act.assert_called_once_with(3)
         agent_mock.update.assert_called_once()
         assert agent_mock.get_next_state.call_count == 2
-        assert pause_physics_mock.call_count == 3
-        assert unpause_physics_mock.call_count == 3
+
+        deepsim_mock_instance = deepsim_mock.get_instance.return_value
+        assert deepsim_mock_instance.pause.call_count == 3
+        assert deepsim_mock_instance.resume.call_count == 3
 
         assert next_state[myself()] == next_state_mock
         assert reward_dict[myself()] == 10.0
         assert not done_dict[myself()]
         assert action_dict[myself()] == 3
 
-    def test_close(self, service_proxy_wrapper_mock):
+    def test_close(self, deepsim_mock):
         agent_mock = MagicMock()
         area_mock = MagicMock()
         area_mock.get_agents.return_value = [agent_mock]
@@ -129,7 +106,7 @@ class EnvironmentTest(TestCase):
         env.close()
         area_mock.close.assert_called_once()
 
-    def test_observation_space(self, service_proxy_wrapper_mock):
+    def test_observation_space(self, deepsim_mock):
         agent_mock = MagicMock()
         area_mock = MagicMock()
         area_mock.get_agents.return_value = [agent_mock]
@@ -137,7 +114,7 @@ class EnvironmentTest(TestCase):
         observation_space = env.observation_space
         assert observation_space == area_mock.observation_space
 
-    def test_action_space(self, service_proxy_wrapper_mock):
+    def test_action_space(self, deepsim_mock):
         agent_mock = MagicMock()
         area_mock = MagicMock()
         area_mock.get_agents.return_value = [agent_mock]

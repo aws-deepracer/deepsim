@@ -164,3 +164,37 @@ class TrackerManagerTest(TestCase):
         tracker_mock = MagicMock()
 
         tracker_manager.discard(tracker_mock)
+
+    def test_pause(self, rospy_mock):
+        with patch("deepsim.sim_trackers.tracker_manager.threading.Thread") as thread_mock:
+            tracker_manager = TrackerManager(is_singleton=False)
+            tracker_manager.start()
+            assert not tracker_manager._callback_event.isSet()
+            assert not tracker_manager.is_paused
+            tracker_manager.pause()
+            assert tracker_manager.is_paused
+
+            sim_time_mock = MagicMock()
+            tracker_manager._update_sim_time(sim_time_mock)
+            assert sim_time_mock != tracker_manager._sim_time
+            assert not tracker_manager._callback_event.isSet()
+
+    def test_resume(self, rospy_mock):
+        with patch("deepsim.sim_trackers.tracker_manager.threading.Thread") as thread_mock:
+            tracker_manager = TrackerManager(is_singleton=False)
+            tracker_manager.start()
+            assert not tracker_manager._callback_event.isSet()
+            assert not tracker_manager.is_paused
+            tracker_manager.pause()
+            assert tracker_manager.is_paused
+
+            sim_time_mock = MagicMock()
+            tracker_manager._update_sim_time(sim_time_mock)
+            assert sim_time_mock != tracker_manager._sim_time
+            assert not tracker_manager._callback_event.isSet()
+
+            tracker_manager.resume()
+            assert not tracker_manager.is_paused
+            tracker_manager._update_sim_time(sim_time_mock)
+            assert sim_time_mock == tracker_manager._sim_time
+            assert tracker_manager._callback_event.isSet()

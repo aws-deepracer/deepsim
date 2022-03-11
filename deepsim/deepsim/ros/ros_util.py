@@ -19,10 +19,13 @@ from typing import Optional
 
 from deepsim.sim_trackers.trackers.get_model_state_tracker import GetModelStateTracker
 from deepsim.exception import DeepSimException
+from deepsim.ros.service_proxy_wrapper import ServiceProxyWrapper
+from deepsim.gazebo.constants import GazeboServiceName
 
 import rospy
 import rospkg
 import rosnode
+from std_srvs.srv import Empty, EmptyRequest
 
 
 class ROSUtil:
@@ -30,6 +33,8 @@ class ROSUtil:
     ROS Utility Class
     """
     rospack = rospkg.RosPack()
+    _pause_physics_service = None
+    _unpause_physics_service = None
 
     @staticmethod
     def is_model_spawned(model_name: str) -> bool:
@@ -142,3 +147,21 @@ class ROSUtil:
             rospy.loginfo("[ROSUtil]: wait_for_rosnode starting ros node {} "
                           "or killing ros node {}".format(alive_nodes, dead_nodes))
             time.sleep(backoff_time_sec)
+
+    @staticmethod
+    def pause_physics() -> None:
+        """
+        Pause simulator physics.
+        """
+        if not ROSUtil._pause_physics_service:
+            ROSUtil._pause_physics_service = ServiceProxyWrapper(GazeboServiceName.PAUSE_PHYSICS, Empty)
+        ROSUtil._pause_physics_service(EmptyRequest())
+
+    @staticmethod
+    def unpause_physics() -> None:
+        """
+        Unpause simulator physics.
+        """
+        if not ROSUtil._unpause_physics_service:
+            ROSUtil._unpause_physics_service = ServiceProxyWrapper(GazeboServiceName.UNPAUSE_PHYSICS, Empty)
+        ROSUtil._unpause_physics_service(EmptyRequest())

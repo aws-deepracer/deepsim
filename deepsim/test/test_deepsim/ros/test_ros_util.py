@@ -20,21 +20,23 @@ import inspect
 
 from deepsim.ros.ros_util import ROSUtil
 from deepsim.exception import DeepSimException
+from std_srvs.srv import EmptyRequest
 
 myself: Callable[[], Any] = lambda: inspect.stack()[1][3]
 
 
+@patch("deepsim.ros.ros_util.ServiceProxyWrapper")
 class ROSUtilTest(TestCase):
     def setUp(self) -> None:
         pass
 
-    def test_is_model_spawned(self):
+    def test_is_model_spawned(self, service_proxy_wrapper_mock):
         with patch("deepsim.ros.ros_util.GetModelStateTracker") as get_model_state_tracker_mock:
             assert ROSUtil.is_model_spawned(myself())
             get_model_state_tracker_mock.get_instance.return_value.get_model_state.side_effect = DeepSimException()
             assert not ROSUtil.is_model_spawned(myself())
 
-    def test_wait_for_model_spawn(self):
+    def test_wait_for_model_spawn(self, service_proxy_wrapper_mock):
         with patch("deepsim.ros.ros_util.GetModelStateTracker") as get_model_state_tracker_mock, \
                 patch("deepsim.ros.ros_util.time") as time_mock:
             ROSUtil.wait_for_model_spawn(model_name=myself())
@@ -42,7 +44,7 @@ class ROSUtilTest(TestCase):
                                                                                                            blocking=True)
             time_mock.sleep.assert_not_called()
 
-    def test_wait_for_model_spawn_error(self):
+    def test_wait_for_model_spawn_error(self, service_proxy_wrapper_mock):
         with patch("deepsim.ros.ros_util.GetModelStateTracker") as get_model_state_tracker_mock, \
                 patch("deepsim.ros.ros_util.time") as time_mock:
             get_model_state_tracker_mock.get_instance.return_value.get_model_state.side_effect = DeepSimException()
@@ -55,7 +57,7 @@ class ROSUtilTest(TestCase):
                 call(0.5), call(0.5), call(0.5), call(0.5), call(0.5)
             )
 
-    def test_wait_for_model_delete(self):
+    def test_wait_for_model_delete(self, service_proxy_wrapper_mock):
         with patch("deepsim.ros.ros_util.GetModelStateTracker") as get_model_state_tracker_mock, \
                 patch("deepsim.ros.ros_util.time") as time_mock:
             get_model_state_tracker_mock.get_instance.return_value.get_model_state.side_effect = DeepSimException()
@@ -64,7 +66,7 @@ class ROSUtilTest(TestCase):
                                                                                                            blocking=True)
             time_mock.sleep.assert_not_called()
 
-    def test_wait_for_model_delete_error(self):
+    def test_wait_for_model_delete_error(self, service_proxy_wrapper_mock):
         with patch("deepsim.ros.ros_util.GetModelStateTracker") as get_model_state_tracker_mock, \
                 patch("deepsim.ros.ros_util.time") as time_mock:
             with self.assertRaises(DeepSimException):
@@ -76,13 +78,13 @@ class ROSUtilTest(TestCase):
                 call(0.5), call(0.5), call(0.5), call(0.5), call(0.5)
             )
 
-    def test_is_ros_node_alive(self):
+    def test_is_ros_node_alive(self, service_proxy_wrapper_mock):
         with patch("deepsim.ros.ros_util.rosnode") as rosnode_mock:
             rosnode_mock.get_node_names.return_value = [myself()]
             assert ROSUtil.is_ros_node_alive(myself())
             assert not ROSUtil.is_ros_node_alive(myself() + "_ghost")
 
-    def test_wait_for_rosnode_alive_nodes(self):
+    def test_wait_for_rosnode_alive_nodes(self, service_proxy_wrapper_mock):
         with patch("deepsim.ros.ros_util.rosnode") as rosnode_mock, \
                 patch("deepsim.ros.ros_util.time") as time_mock:
             rosnode_mock.get_node_names.return_value = [myself()]
@@ -90,7 +92,7 @@ class ROSUtilTest(TestCase):
             assert rosnode_mock.get_node_names.call_count == 1
             time_mock.sleep.assert_not_called()
 
-    def test_wait_for_rosnode_alive_nodes_error(self):
+    def test_wait_for_rosnode_alive_nodes_error(self, service_proxy_wrapper_mock):
         with patch("deepsim.ros.ros_util.rosnode") as rosnode_mock, \
                 patch("deepsim.ros.ros_util.time") as time_mock:
             rosnode_mock.get_node_names.return_value = [myself()]
@@ -104,7 +106,7 @@ class ROSUtilTest(TestCase):
                 call(0.5), call(0.5), call(0.5), call(0.5), call(0.5)
             )
 
-    def test_wait_for_rosnode_dead_nodes(self):
+    def test_wait_for_rosnode_dead_nodes(self, service_proxy_wrapper_mock):
         with patch("deepsim.ros.ros_util.rosnode") as rosnode_mock, \
                 patch("deepsim.ros.ros_util.time") as time_mock:
             rosnode_mock.get_node_names.return_value = [myself()]
@@ -113,7 +115,7 @@ class ROSUtilTest(TestCase):
             assert rosnode_mock.get_node_names.call_count == 1
             time_mock.sleep.assert_not_called()
 
-    def test_wait_for_rosnode_dead_nodes_error(self):
+    def test_wait_for_rosnode_dead_nodes_error(self, service_proxy_wrapper_mock):
         with patch("deepsim.ros.ros_util.rosnode") as rosnode_mock, \
                 patch("deepsim.ros.ros_util.time") as time_mock:
             rosnode_mock.get_node_names.return_value = [myself()]
@@ -126,3 +128,12 @@ class ROSUtilTest(TestCase):
             time_mock.sleep.has_calls(
                 call(0.5), call(0.5), call(0.5), call(0.5), call(0.5)
             )
+
+    def test_pause_physics(self, service_proxy_wrapper_mock):
+        ROSUtil.pause_physics()
+
+        service_proxy_wrapper_mock.return_value.assert_called_once_with(EmptyRequest())
+
+    def test_unpause_physics(self, service_proxy_wrapper_mock):
+        ROSUtil.unpause_physics()
+        service_proxy_wrapper_mock.return_value.assert_called_once_with(EmptyRequest())

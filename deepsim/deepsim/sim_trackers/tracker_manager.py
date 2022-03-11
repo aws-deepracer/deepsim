@@ -16,7 +16,6 @@
 """A class for tracker manager."""
 from collections import defaultdict
 import threading
-from typing import TypeVar
 
 from deepsim.sim_trackers.tracker import TrackerInterface
 import deepsim.sim_trackers.constants as consts
@@ -66,7 +65,18 @@ class TrackerManager(object):
         self._callback_event = threading.Event()
         self._should_stop_update = False
         self._update_loop_thread = None
+        self._is_paused = False
         rospy.Subscriber('/clock', Clock, self._update_sim_time)
+
+    @property
+    def is_paused(self) -> bool:
+        """
+        Returns the flag whether update loop is in paused state or not.
+
+        Returns:
+            bool: the flag whether update loop is in paused state or not.
+        """
+        return self._is_paused
 
     def add(self, tracker: TrackerInterface,
             priority: consts.TrackerPriority = consts.TrackerPriority.NORMAL) -> None:
@@ -106,6 +116,9 @@ class TrackerManager(object):
                 self._tracker_map[priority].discard(tracker)
 
     def start(self) -> None:
+        """
+        Start the update loop.
+        """
         if not self._update_loop_thread:
             self._last_time = None
             self._callback_event.clear()
@@ -125,6 +138,18 @@ class TrackerManager(object):
             self._update_loop_thread.join()
             self._update_loop_thread = None
 
+    def pause(self) -> None:
+        """
+        Pause the update loop.
+        """
+        self._is_paused = True
+
+    def resume(self) -> None:
+        """
+        Resume the update loop.
+        """
+        self._is_paused = False
+
     def _update_sim_time(self, sim_time: Clock) -> None:
         """
         Callback when sim time is updated
@@ -132,6 +157,8 @@ class TrackerManager(object):
         Args:
             sim_time (Clock): simulation time
         """
+        if self._is_paused:
+            return
         self._sim_time = sim_time
         self._callback_event.set()
 

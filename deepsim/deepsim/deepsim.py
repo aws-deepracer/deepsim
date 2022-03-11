@@ -63,6 +63,24 @@ class DeepSim(object):
         from deepsim.sim_trackers.tracker_manager import TrackerManager
         TrackerManager.get_instance().stop()
 
+    def pause(self) -> None:
+        """
+        Pause the simulation.
+        """
+        from deepsim.sim_trackers.tracker_manager import TrackerManager
+        from deepsim.ros.ros_util import ROSUtil
+        TrackerManager.get_instance().pause()
+        ROSUtil.pause_physics()
+
+    def resume(self) -> None:
+        """
+        Resume the simulation.
+        """
+        from deepsim.sim_trackers.tracker_manager import TrackerManager
+        from deepsim.ros.ros_util import ROSUtil
+        TrackerManager.get_instance().resume()
+        ROSUtil.unpause_physics()
+
     @property
     def timestep(self) -> float:
         """
