@@ -1,6 +1,12 @@
-## DeepSim Gazebo Framework
+## DeepSim Behaviour Tree
 
-The DeepSim Behavior Tree package is a part of DeepSim Toolkit that provides a behavior tree implementation. 
+The DeepSim Behaviour Tree package is a part of DeepSim Toolkit that provides a behaviour tree implementation. 
+
+## Installation
+
+To install the DeepSim Behaviour Tree, run the `pip install deepsim-btree`command.
+
+Python 3.6, 3.7, 3.8, and 3.9 are supported on Linux, Windows, and macOS.
 
 ## License
 
