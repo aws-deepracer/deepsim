@@ -3,7 +3,7 @@
 <package format="3">
   <name>deepsim_btree</name>
   <author>Amazon Web Services</author>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <description>A Behaviour Tree library for DeepSim Toolkit.</description>
   <maintainer email="aws-deepracer@amazon.com">AWS DeepRacer</maintainer>
   <license>Apache License 2.0</license>

@@ -41,14 +41,12 @@ required_packages = [
     "setuptools",
 ]
 
-
 test_required_packages = [
     "flake8>=3.5,<4.0.0",
     "pytest-flake8==1.0.7",
     "pytest-pep257==0.0.5",
     "pytest-timeout==1.4.2",
 ]
-
 
 setup_args = {
     "name": package_name,
@@ -57,6 +55,7 @@ setup_args = {
     "package_dir": {"": "."},
     "description": "A Behaviour Tree library for DeepSim Toolkit.",
     "long_description": read("README.md"),
+    "long_description_content_type": 'text/markdown',
     "author": "Amazon Web Services",
     "url": "https://github.com/aws-deepracer/deepsim/tree/main/deepsim_btree",
     "license": "Apache License 2.0",
@@ -70,6 +69,7 @@ setup_args = {
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     "install_requires": required_packages,
     "tests_require": test_required_packages,
